@@ -23,18 +23,22 @@
             html = html + '<ul>';
             for (var i = 0; i < objects.length; i++) {
                 var object = objects[i];
-                html = html + '<li>' + object.name + ',' + object.tweet + ',' + object.time + '</li>';
+                html = html + '<li>' +object.id + ',' + object.name + ',' + object.time + '</li>';
             }
             html = html + '</ul>';
             document.getElementById('result').innerHTML = html;
+        }
+        function  button2Pressed(){
+            
         }
     </script>
 
 </head>
 
 <body>
-    <h1>Tweets</h1>
+    <h1>ツイート</h1>
     <button onclick="button1Pressed()">X</button>
+    <button onclick="button2Pressed()">検索</button>
     <hr>
     <p id="result">xxxx</p>
 </body>
