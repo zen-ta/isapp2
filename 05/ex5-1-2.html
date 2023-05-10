@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../lib/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/osql.js"></script>
+
+    <script>
+        osql.requireLogin();//すべてのページに入れる．google認証をして，osql.connect()や，osql.getMe()を使えるようにしてくれる．
+
+
+
+        async function  button2Pressed(){
+            var tant = document.getElementById('tf1').value;
+            var data = 'select*from Tweets where tweet like "%'+tant+'%"';
+            var objects = await osql.connect(data);
+            var html = '';
+            html = html + '<ul>';
+            for (var i = 0; i < objects.length; i++) {
+                var object = objects[i];
+                html = html + '<li>' +object.tweet+object.id + ',' + object.name + ',' + object.time + '</li>';
+            }
+            html = html + '</ul>';
+            document.getElementById('tweet').innerHTML = html;
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>ツイート</h1>
+    <input id="tf1"  type="textfield">
+    <button onclick="button2Pressed()">検索</button>
+    <hr>
+    <p id="tweet">検索結果</p>
+</body>
+
+</html>
