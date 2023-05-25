@@ -19,7 +19,11 @@
             html = "ようこそ" + name + "さん";
             var id = sessionStorage.getItem("userid");
             document.getElementById('welcome').innerHTML = html;
+            //6-2
             document.getElementById('change').href += "?userid=" + id;
+            //6-4
+            document.getElementById('tweeting').href += "?userid=" + id;
+
         }
     </script>
 
@@ -30,6 +34,7 @@
     <p id="welcome">ようこそxxさん</p>
     <br>
     <a id="change" href="update.html">変更</a>
+    <a id="tweeting" href="tweet.html">ツイート</a>
 
     <hr>
 
