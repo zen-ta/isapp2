@@ -14,41 +14,46 @@
         $(document).ready(function () {
             execSelect();
         });
-
+        var second= [];
+        var number =[]
         async function execSelect() {
             var sql = 'select * from Users';
             var objects = await osql.connect(sql);
             console.log(objects);
             var html = '';
-            html = html + '<table border="1">';
-            for (var i = 0; i < objects.length; i++) {
+            html = html + '<table border="1" id="tbl">';
+            for (var i =0; i < objects.length; i++) {
                 html = html + '<tr>';
                 var object = objects[i];
                 html = html + '<td>' + object.id + '</td>';
                 html = html + '<td>' + object.name + '</td>';
                 html = html + '<td>' + '<a href="update.html?userid=' +object.id + '">変更</a>' + '</td>';
+                html = html +'<td>' + '<button id ="button'+ i +'" value ="'+ object.id+'" onclick ="buttonPressed('+i+')">削除 </button>'+ '</td>';
                 html = html + '</tr>';
+                second.push(object.id);
+                number.push(i);
             }
             html = html + '</table>';
             document.getElementById('result').innerHTML = html;
-        }
-        async function buttonPressed(){
-            var userid = document.getElementById('tf1').value;
-            var sql = `delete from Users where id="${userid}"`;
-            var objects = await osql.connect(sql);
-            console.log(objects);
+                }
 
-            
-
+        async function buttonPressed(i){
+            var dar = document.getElementById("button"+i).value;
+            console.log(dar);
+            var ans = window.confirm('本当にけしていいんですね');
+            if(ans == true){
+            var sql2 = `delete from Users where id="${dar}"`;
+            var objects2 = await osql.connect(sql2);
+            console.log(objects2);
+            }
         }
+
     </script>
 
 </head>
-
+ 
 <body>
     <h1>Users</h1>
-    ID:<input id="tf1" value="" type="textfield">
-    <button onclick="buttonPressed()">削除</button>
     <p id="result">xxxx</p>
 </body>
 
